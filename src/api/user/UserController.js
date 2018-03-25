@@ -7,20 +7,19 @@ export default class UserController {
         self.userService = userService;
         self.constants = constants;
         
-        self.expressRouter.post('/input', self.insertUser);
-        self.expressRouter.post('/bulk', self.insertBulkUsers);
+        self.expressRouter.post('', self.insertUser);
 
-        self.expressRouter.put('/update/:name', self.updateUser);
+        self.expressRouter.put('/:id', self.updateUser);
 
-        self.expressRouter.get('/fetch/:name', self.findUser);
+        self.expressRouter.get('/:id', self.findUser);
 
-        self.expressRouter.delete('/remove/:name', self.removeUser);
+        self.expressRouter.delete('/:id', self.removeUser);
 
         return self.expressRouter;
     }
 
     insertUser(req, res, next) {
-        self.userService.insertUser(req.body.name)
+        self.userService.insertUser(req.body.id)
             .then((result) => {
                 res.status(self.constants.SUCCESS).json(result);
             })
@@ -30,7 +29,7 @@ export default class UserController {
     }
 
     findUser(req, res, next) {
-        self.userService.findUser(req.params.name)
+        self.userService.findUser(req.params.id)
             .then((result) => {
                 res.status(self.constants.SUCCESS).json(result);
             })
@@ -41,7 +40,7 @@ export default class UserController {
 
     updateUser(req, res, next) {
 
-        self.userService.updateUser(req.params.name, req.body)
+        self.userService.updateUser(req.params.id, req.body)
             .then((result) => {
                 res.status(self.constants.SUCCESS).json(result);
             })
@@ -51,17 +50,7 @@ export default class UserController {
     }
 
     removeUser(req, res, next) {
-        self.userService.removeUser(req.params.name)
-            .then((result) => {
-                res.status(self.constants.SUCCESS).json(result);
-            })
-            .catch((err) => {
-                return next(err);
-            });
-    }
-
-    insertBulkUsers(req, res, next) {
-        self.userService.insertBulkUsers(req.body)
+        self.userService.removeUser(req.params.id)
             .then((result) => {
                 res.status(self.constants.SUCCESS).json(result);
             })
