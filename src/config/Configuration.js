@@ -1,20 +1,21 @@
 module.exports = {
-  env: 'DEV',
-  port: 3001,
-  clusteringEnabled: false,
-  errors: require("../ConfigErrors"),
+    env: 'DEV',
+    port: 3001,
+    clusteringEnabled: false,
+    errors: require("../ConfigErrors"),
 
-  DB: {
-    mongodb: {
-      nodebaseapp: {
-        connection: "mongodb://nodebaseapp:nodebaseapp1@ds129386.mlab.com:29386/node-app",
+    DB: {
+      mongodb: {
+        nodebaseapp: {
+          connection: "mongodb://xylemapp:1qaz2wsx@ds125489.mlab.com:25489/xylem",
+        }
+      }
+    },
+
+    dataModel: {
+      collection: {
+        user: "User",
+        device: "Device"
       }
     }
-  },
-
-  dataModel: {
-    collection: {
-      user: "User"
-    }
-  }
 };

@@ -3,9 +3,9 @@ import BaseRepository from './BaseRepository';
 
 let self, schema;
 
-export default class UserRepository extends BaseRepository {
+export default class DeviceRepository extends BaseRepository {
     constructor(q, config, constants, mongoose) {
-        super(q, config, constants, config.dataModel.collection.user);
+        super(q, config, constants, config.dataModel.collection.device);
         self = this;
         self.q = q;
         self.config = config;
@@ -14,16 +14,15 @@ export default class UserRepository extends BaseRepository {
 
         let Schema = self.mongoose.Schema;
         let schemaStructure = {
-            userName: String,
-            password: String,
-            firstName: String,
-            lastName: String
+            type: String
         };
-        schema = self.mongoose.Schema(schemaStructure, { collection: self.config.dataModel.collection.user });
+        schema = self.mongoose.Schema(schemaStructure, { collection: self.config.dataModel.collection.device });
     }
 
-    insertUser(user) {
-        return self._insert(user, schema)
+    insertDevice(device) {
+        device._id = device.id;
+        delete device.id;
+        return self._insert(device, schema)
             .then((result) => {
                 return result;
             })
@@ -33,7 +32,7 @@ export default class UserRepository extends BaseRepository {
             });
     }
 
-    findUser(id) {
+    findDevice(id) {
         let query = {
             _id: id
         };
@@ -48,11 +47,11 @@ export default class UserRepository extends BaseRepository {
             });
     }
 
-    updateUser(id, updateUser) {
+    updateDevice(id, updateDevice) {
         let query = {
             _id: id
         };
-        return self._update(query, updateUser, schema)
+        return self._update(query, updateDevice, schema)
             .then((result) => {
                 return result;
             })
@@ -62,12 +61,12 @@ export default class UserRepository extends BaseRepository {
             });
     }
 
-    removeUser(id) {
-        let deleteUser = {
+    removeDevice(id) {
+        let deleteDevice = {
             _id: id
         };
 
-        return self._remove(deleteUser, schema)
+        return self._remove(deleteDevice, schema)
             .then((result) => {
                 return result;
             })
@@ -77,9 +76,9 @@ export default class UserRepository extends BaseRepository {
             });
     }
 
-    insertBulkUsers(users) {
+    insertBulkDevices(Devices) {
 
-        return self._bulkInsert(users, schema)
+        return self._bulkInsert(Devices, schema)
             .then((result) => {
                 return result;
             })

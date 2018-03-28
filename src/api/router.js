@@ -4,7 +4,10 @@ let self, router = new express.Router();
 
 export default class Router {
 
-    constructor(userController, constants, swaggerSpec) {
+    constructor(userController,
+                deviceController,
+                constants,
+                swaggerSpec) {
         self = this;
         self.constants = constants;
         self.swaggerSpec = swaggerSpec;
@@ -16,8 +19,10 @@ export default class Router {
 
         const path = `${self.constants.V1}`; 
         console.log('http://{hostname}' + path);
-        router.use(`/swagger`, loadSwagger)
-        router.use(`${path}/user`, userController);
+        router.use(`/swagger`, loadSwagger);
+
+        router.use(`${path}/users`, userController);
+        router.use(`${path}/devices`, deviceController);
 
         return router;
     }

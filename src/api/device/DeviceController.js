@@ -1,32 +1,30 @@
 let self;
 
-export default class UserController {
-    constructor(express, userService, constants, helpersUtil) {
+export default class DeviceController {
+    constructor(express, deviceService, constants, helpersUtil) {
         self = this;
         self.expressRouter = new express.Router();
-        self.userService = userService;
+        self.deviceService = deviceService;
         self.constants = constants;
         self.helpersUtil = helpersUtil;
-        
-        self.expressRouter.post('', self.createUser);
 
-        self.expressRouter.put('/:id', self.updateUser);
+        self.expressRouter.post('', self.createDevice);
 
-        self.expressRouter.get('/:id', self.findUser);
+        self.expressRouter.put('/:id', self.updateDevice);
 
-        self.expressRouter.delete('/:id', self.removeUser);
+        self.expressRouter.get('/:id', self.findDevice);
+
+        self.expressRouter.delete('/:id', self.removeDevice);
 
         return self.expressRouter;
     }
 
-    createUser(req, res, next) {
-        let user = {
-          firstName: self.helpersUtil.fromModelVal(req.body.firstName),
-          lastName: self.helpersUtil.fromModelVal(req.body.lastName),
-          userName: self.helpersUtil.fromModelVal(req.body.userName),
-          password: self.helpersUtil.fromModelVal(req.body.password)
+    createDevice(req, res, next) {
+        let device = {
+            id: self.helpersUtil.fromModelVal(req.body.id),
+            type: self.helpersUtil.fromModelVal(req.body.type)
         };
-        self.userService.insertUser(user)
+        self.deviceService.insertDevice(device)
             .then((result) => {
                 res.status(self.constants.SUCCESS).json(result);
             })
@@ -35,8 +33,8 @@ export default class UserController {
             });
     }
 
-    findUser(req, res, next) {
-        self.userService.findUser(req.params.id)
+    findDevice(req, res, next) {
+        self.deviceService.findDevice(req.params.id)
             .then((result) => {
                 res.status(self.constants.SUCCESS).json(result);
             })
@@ -45,8 +43,8 @@ export default class UserController {
             });
     }
 
-    updateUser(req, res, next) {
-        self.userService.updateUser(req.params.id, req.body)
+    updateDevice(req, res, next) {
+        self.deviceService.updateDevice(req.params.id, req.body)
             .then((result) => {
                 res.status(self.constants.SUCCESS).json(result);
             })
@@ -55,8 +53,8 @@ export default class UserController {
             });
     }
 
-    removeUser(req, res, next) {
-        self.userService.removeUser(req.params.id)
+    removeDevice(req, res, next) {
+        self.deviceService.removeDevice(req.params.id)
             .then((result) => {
                 res.status(self.constants.SUCCESS).json(result);
             })

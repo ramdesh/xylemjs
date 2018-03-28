@@ -2,26 +2,26 @@
 let self;
 
 /**
- * User Service
+ * Device Service
  * @constructor
  */
-export default class UserService {
-    constructor(config, 
-                constants, 
+export default class DeviceService {
+    constructor(config,
+                constants,
                 exceptionFactory,
                 q,
-                userRepository) {
+                deviceRepository) {
 
         self = this;
         self.q = q;
         self.config = config;
         self.constants = constants;
         self.exceptionFactory = exceptionFactory;
-        self.userRepository = userRepository;
+        self.deviceRepository = deviceRepository;
     }
 
-    insertUser(user) {
-        return self.userRepository.insertUser(user)
+    insertDevice(device) {
+        return self.deviceRepository.insertDevice(device)
             .then((result) => {
                 return self.q.when(result);
             })
@@ -31,8 +31,8 @@ export default class UserService {
             });
     }
 
-    findUser(id) {
-        return self.userRepository.findUser(id)
+    findDevice(id) {
+        return self.deviceRepository.findDevice(id)
             .then((result) => {
                 return self.q.when(result);
             })
@@ -42,8 +42,8 @@ export default class UserService {
             });
     }
 
-    updateUser(id, user) {
-        return self.userRepository.updateUser(id, user)
+    updateDevice(id, device) {
+        return self.deviceRepository.updateDevice(id, device)
             .then((result) => {
                 return self.q.when(result);
             })
@@ -53,19 +53,8 @@ export default class UserService {
             });
     }
 
-    removeUser(id) {
-        return self.userRepository.removeUser(id)
-            .then((result) => {
-                return self.q.when(result);
-            })
-            .catch((err) => {
-                console.log(err);
-                return self.q.when(null);
-            });
-    }
-
-    insertBulkUsers(usersArray) {
-        return self.userRepository.insertBulkUsers(usersArray)
+    removeDevice(id) {
+        return self.deviceRepository.removeDevice(id)
             .then((result) => {
                 return self.q.when(result);
             })

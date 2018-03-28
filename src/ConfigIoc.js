@@ -18,16 +18,19 @@ import CrossOriginMW from './middleware/CrossOriginMW';
 
 // Import controllers
 import UserController from './api/user/UserController';
+import DeviceController from './api/device/DeviceController';
 
 // Import Factories
 import ExceptionFactory from './error/ExceptionFactory';
 
 // Import Services
-import UserService from './services/UserService'
+import UserService from './services/UserService';
+import DeviceService from './services/DeviceService';
 
 // Import Repositories
-import UserRepository from './repository/UserRepository'
-import BaseRepository from './repository/BaseRepository'
+import BaseRepository from './repository/BaseRepository';
+import UserRepository from './repository/UserRepository';
+import DeviceRepository from './repository/DeviceRepository';
 
 let container = awilix.createContainer({
     resolutionMode: awilix.ResolutionMode.CLASSIC
@@ -74,13 +77,17 @@ container.register({
 
     // Register controllers
     userController: awilix.asClass(UserController).singleton(),
+    deviceController: awilix.asClass(DeviceController).singleton(),
 
     // Register services
     userService: awilix.asClass(UserService).singleton(),
+    deviceService: awilix.asClass(DeviceService).singleton(),
 
-    // Register repository
+    // Register
+    baseRepository: awilix.asClass(BaseRepository).singleton(),
     userRepository: awilix.asClass(UserRepository).singleton(),
-    baseRepository: awilix.asClass(BaseRepository).singleton()
+    deviceRepository: awilix.asClass(DeviceRepository).singleton()
+
 });
 
 export default container;
