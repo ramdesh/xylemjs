@@ -17,7 +17,8 @@ export default class UserRepository extends BaseRepository {
             userName: String,
             password: String,
             firstName: String,
-            lastName: String
+            lastName: String,
+            role: String
         };
         schema = self.mongoose.Schema(schemaStructure, { collection: self.config.dataModel.collection.user });
     }

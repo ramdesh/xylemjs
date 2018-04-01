@@ -6,19 +6,8 @@ export default class HelpersUtil {
         self.constants = constants;
         self.q = q;
     }
-    
-    stringFormat(format, args) {
-        if(args) {
-            return format.replace(/{(\d+)}/g, function (match, number) {
-                return typeof args[number] !== 'undefined'? args[number]: match;
-            });
-        }
-        else{
-            return format;
-        }
-    };
 
-    fromModelVal(val, format){
+    fromModelVal(val, format) {
         if(typeof(val) === "undefined"){
             return null;
         }
@@ -53,5 +42,18 @@ export default class HelpersUtil {
         }
 
         return null;
-    } 
+    }
+    
+    stringFormat(format, args) {
+        if(args) {
+            return format.replace(/{(\d+)}/g, function (match, number) {
+                return typeof args[number] !== 'undefined'? args[number]: match;
+            });
+        }
+        else{
+            return format;
+        }
+    }
+
+
 }

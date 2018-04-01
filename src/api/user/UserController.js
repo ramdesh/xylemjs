@@ -21,10 +21,11 @@ export default class UserController {
 
     createUser(req, res, next) {
         let user = {
-          firstName: self.helpersUtil.fromModelVal(req.body.firstName),
-          lastName: self.helpersUtil.fromModelVal(req.body.lastName),
-          userName: self.helpersUtil.fromModelVal(req.body.userName),
-          password: self.helpersUtil.fromModelVal(req.body.password)
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          userName: req.body.userName,
+          password: req.body.password,
+          role: req.body.role
         };
         self.userService.insertUser(user)
             .then((result) => {
