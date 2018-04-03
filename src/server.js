@@ -2,8 +2,13 @@ import http from 'http';
 import * as constants from './utils/constants';
 import config from './config/Configuration';
 import app from './app';
+import Mqttsv from './mqttsv';
 
 const server = http.createServer(app);
+const mqttsv = Mqttsv.getServer();
+
+mqttsv.attachHttpServer(server);
+
 let port = process.env.PORT || config.port;
 server.listen(port, function () {
     console.log(`Listening on port ${port}`);

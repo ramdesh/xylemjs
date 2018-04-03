@@ -1,8 +1,8 @@
 {
-  "name": "node-express-es6-base",
+  "name": "xylemjs",
   "version": "0.0.1",
   "private": true,
-  "description": "node.js express.js ES6-compliant base package",
+  "description": "MQTT broker framework using Hyperledger Fabric as a backend",
   "keywords": [
     "node",
     "express",
@@ -32,6 +32,7 @@
     "merge": "^1.2.0",
     "mongodb": "^3.0.0-rc0",
     "mongoose": "^4.13.6",
+    "mosca": "^2.8.0",
     "path": "^0.12.7",
     "pump": "^2.0.0",
     "q": "^1.4.1",

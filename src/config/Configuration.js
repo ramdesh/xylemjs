@@ -15,7 +15,8 @@ module.exports = {
     dataModel: {
       collection: {
         user: "User",
-        device: "Device"
+        device: "Device",
+        pubSub: "PubSub"
       }
     }
 };
