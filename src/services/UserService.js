@@ -10,7 +10,8 @@ export default class UserService {
                 constants, 
                 exceptionFactory,
                 q,
-                userRepository) {
+                userRepository,
+                deviceRepository) {
 
         self = this;
         self.q = q;
@@ -70,6 +71,17 @@ export default class UserService {
                 return self.q.when(result);
             })
             .catch((err) => {
+                console.log(err);
+                return self.q.when(null);
+            });
+    }
+
+    getDevicesByUser(userId) {
+        return self.deviceRepository.findDevicesByUser(userId)
+            .then(result => {
+                return self.q.when(result);
+            })
+            .catch(err => {
                 console.log(err);
                 return self.q.when(null);
             });

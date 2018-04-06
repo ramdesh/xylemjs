@@ -16,7 +16,8 @@ module.exports = {
       collection: {
         user: "User",
         device: "Device",
-        pubSub: "PubSub"
+        pubSub: "PubSub",
+        deviceMessage: "DeviceMessage"
       }
     }
 };

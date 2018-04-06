@@ -1,6 +1,9 @@
 import mosca from 'mosca';
 import config from './config/Configuration';
+import container from './ConfigIoc';
+
 let server;
+let deviceMessageService = container.resolve('deviceMessageService');
 let ascoltatore = {
     //using ascoltatore
     type: 'mongo',
@@ -12,7 +15,10 @@ let ascoltatore = {
 let moscaSettings = {
     // port: 1883,
     interfaces:[
-        {type:"mqtt", port: 1883},
+        {
+            type:"mqtt",
+            port: 1883
+        },
         // {type:"mqtts", port:8883, credentials:{keyPath:SECURE_KEY,certPath: SECURE_CERT}},
     ],
     backend: ascoltatore,
@@ -41,6 +47,7 @@ let Mqttsv = function(){
     // fired when a message is received
     server.on('published', function(packet, client) {
         console.log('Published', packet);
+        deviceMessageService.insertDeviceMessage('test-client', packet.topic, packet.payload.toString());
     });
 
     // when client return puback,

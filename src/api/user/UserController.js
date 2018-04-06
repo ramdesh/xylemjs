@@ -16,6 +16,8 @@ export default class UserController {
 
         self.expressRouter.delete('/:id', self.removeUser);
 
+        self.expressRouter.get('/:id/devices', self.getDevicesByUser);
+
         return self.expressRouter;
     }
 
@@ -59,6 +61,16 @@ export default class UserController {
     removeUser(req, res, next) {
         self.userService.removeUser(req.params.id)
             .then((result) => {
+                res.status(self.constants.SUCCESS).json(result);
+            })
+            .catch((err) => {
+                return next(err);
+            });
+    }
+
+    getDevicesByUser(req, res, next) {
+        self.userService.getDevicesByUser(req.params.id)
+            .then(result => {
                 res.status(self.constants.SUCCESS).json(result);
             })
             .catch((err) => {

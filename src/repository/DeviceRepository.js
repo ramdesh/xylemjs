@@ -14,7 +14,8 @@ export default class DeviceRepository extends BaseRepository {
 
         let Schema = self.mongoose.Schema;
         let schemaStructure = {
-            type: String
+            type: String,
+            ownerId: String
         };
         schema = self.mongoose.Schema(schemaStructure, { collection: self.config.dataModel.collection.device });
     }
@@ -47,6 +48,20 @@ export default class DeviceRepository extends BaseRepository {
             });
     }
 
+    findDevicesByUser(userId) {
+        let query = {
+            ownerId: userId
+        };
+        return self._find(query, schema)
+            .then((result) => {
+                return result;
+            })
+            .catch((err) => {
+                console.log(err);
+                return self.q.when({});
+            });
+    }
+
     updateDevice(id, updateDevice) {
         let query = {
             _id: id
@@ -67,18 +82,6 @@ export default class DeviceRepository extends BaseRepository {
         };
 
         return self._remove(deleteDevice, schema)
-            .then((result) => {
-                return result;
-            })
-            .catch((err) => {
-                console.log(err);
-                return self.q.when({});
-            });
-    }
-
-    insertBulkDevices(Devices) {
-
-        return self._bulkInsert(Devices, schema)
             .then((result) => {
                 return result;
             })

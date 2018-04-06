@@ -26,11 +26,13 @@ import ExceptionFactory from './error/ExceptionFactory';
 // Import Services
 import UserService from './services/UserService';
 import DeviceService from './services/DeviceService';
+import DeviceMessageService from './services/DeviceMessageService';
 
 // Import Repositories
 import BaseRepository from './repository/BaseRepository';
 import UserRepository from './repository/UserRepository';
 import DeviceRepository from './repository/DeviceRepository';
+import DeviceMessageRepository from './repository/DeviceMessageRepository';
 
 let container = awilix.createContainer({
     resolutionMode: awilix.ResolutionMode.CLASSIC
@@ -82,11 +84,13 @@ container.register({
     // Register services
     userService: awilix.asClass(UserService).singleton(),
     deviceService: awilix.asClass(DeviceService).singleton(),
+    deviceMessageService: awilix.asClass(DeviceMessageService).singleton(),
 
     // Register
     baseRepository: awilix.asClass(BaseRepository).singleton(),
     userRepository: awilix.asClass(UserRepository).singleton(),
-    deviceRepository: awilix.asClass(DeviceRepository).singleton()
+    deviceRepository: awilix.asClass(DeviceRepository).singleton(),
+    deviceMessageRepository: awilix.asClass(DeviceMessageRepository).singleton()
 
 });
 

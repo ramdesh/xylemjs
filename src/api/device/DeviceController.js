@@ -1,10 +1,11 @@
 let self;
 
 export default class DeviceController {
-    constructor(express, deviceService, constants, helpersUtil) {
+    constructor(express, deviceService, deviceMessageService, constants, helpersUtil) {
         self = this;
-        self.expressRouter = new express.Router();
+        self.expressRouter = new express.Router({ mergeParams: true });
         self.deviceService = deviceService;
+        self.deviceMessageService = deviceMessageService;
         self.constants = constants;
         self.helpersUtil = helpersUtil;
 
@@ -16,13 +17,16 @@ export default class DeviceController {
 
         self.expressRouter.delete('/:id', self.removeDevice);
 
+        self.expressRouter.get('/:id/messages', self.getDeviceMessages);
+
         return self.expressRouter;
     }
 
     createDevice(req, res, next) {
         let device = {
-            id: self.helpersUtil.fromModelVal(req.body.id),
-            type: self.helpersUtil.fromModelVal(req.body.type)
+            id: req.body.id,
+            type: req.body.type,
+            ownerId: req.body.ownerId
         };
         self.deviceService.insertDevice(device)
             .then((result) => {
@@ -43,6 +47,7 @@ export default class DeviceController {
             });
     }
 
+
     updateDevice(req, res, next) {
         self.deviceService.updateDevice(req.params.id, req.body)
             .then((result) => {
@@ -62,4 +67,15 @@ export default class DeviceController {
                 return next(err);
             });
     }
+
+    getDeviceMessages(req, res, next) {
+        self.deviceMessageService.findMessagesByDevice(req.params.id)
+            .then((result) => {
+                res.status(self.constants.SUCCESS).json(result);
+            })
+            .catch((err) => {
+                return next(err);
+            });
+    }
+
 }
