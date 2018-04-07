@@ -19,6 +19,7 @@ import CrossOriginMW from './middleware/CrossOriginMW';
 // Import controllers
 import UserController from './api/user/UserController';
 import DeviceController from './api/device/DeviceController';
+import LoginController from './api/user/LoginController';
 
 // Import Factories
 import ExceptionFactory from './error/ExceptionFactory';
@@ -72,7 +73,6 @@ container.register({
     constants: awilix.asValue(constants),
     swaggerSpec: awilix.asValue(swaggerSpec),
     mongoose: awilix.asValue(mongoose),
-    helpersUtil: awilix.asValue(HelpersUtil),
 
     // Register middleware
     crossOriginMW: awilix.asClass(CrossOriginMW).singleton(),
@@ -80,17 +80,21 @@ container.register({
     // Register controllers
     userController: awilix.asClass(UserController).singleton(),
     deviceController: awilix.asClass(DeviceController).singleton(),
+    loginController: awilix.asClass(LoginController).singleton(),
 
     // Register services
     userService: awilix.asClass(UserService).singleton(),
     deviceService: awilix.asClass(DeviceService).singleton(),
     deviceMessageService: awilix.asClass(DeviceMessageService).singleton(),
 
-    // Register
+    // Register repositories
     baseRepository: awilix.asClass(BaseRepository).singleton(),
     userRepository: awilix.asClass(UserRepository).singleton(),
     deviceRepository: awilix.asClass(DeviceRepository).singleton(),
-    deviceMessageRepository: awilix.asClass(DeviceMessageRepository).singleton()
+    deviceMessageRepository: awilix.asClass(DeviceMessageRepository).singleton(),
+
+    // Register utilities
+    helpersUtil: awilix.asClass(HelpersUtil).singleton()
 
 });
 

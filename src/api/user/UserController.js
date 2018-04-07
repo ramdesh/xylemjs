@@ -10,6 +10,8 @@ export default class UserController {
         
         self.expressRouter.post('', self.createUser);
 
+        self.expressRouter.get('', self.getUsers);
+
         self.expressRouter.put('/:id', self.updateUser);
 
         self.expressRouter.get('/:id', self.findUser);
@@ -30,6 +32,16 @@ export default class UserController {
           role: req.body.role
         };
         self.userService.insertUser(user)
+            .then((result) => {
+                res.status(self.constants.SUCCESS).json(result);
+            })
+            .catch((err) => {
+                return next(err);
+            });
+    }
+
+    getUsers(req, res, next) {
+        self.userService.getUsers()
             .then((result) => {
                 res.status(self.constants.SUCCESS).json(result);
             })

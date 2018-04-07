@@ -36,6 +36,16 @@ export default class BaseRepository {
             });
     }
 
+    _findAll(query, schema) {
+        self.model = self.mongoose.model(self.collection, schema);
+
+        let find = self.q.nbind(self.model.find, self.model);
+        return find(query)
+            .then((result) => {
+                return self.q.when(result);
+            });
+    }
+
     _remove(query, schema) {
         self.model = self.mongoose.model(self.collection, schema);
 

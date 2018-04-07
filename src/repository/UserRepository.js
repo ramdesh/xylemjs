@@ -14,7 +14,7 @@ export default class UserRepository extends BaseRepository {
 
         let Schema = self.mongoose.Schema;
         let schemaStructure = {
-            userName: String,
+            username: String,
             password: String,
             firstName: String,
             lastName: String,
@@ -25,6 +25,17 @@ export default class UserRepository extends BaseRepository {
 
     insertUser(user) {
         return self._insert(user, schema)
+            .then((result) => {
+                return result;
+            })
+            .catch((err) => {
+                console.log(err);
+                return self.q.when({});
+            });
+    }
+
+    getUsers() {
+        return self._findAll({}, schema)
             .then((result) => {
                 return result;
             })
@@ -81,6 +92,37 @@ export default class UserRepository extends BaseRepository {
     insertBulkUsers(users) {
 
         return self._bulkInsert(users, schema)
+            .then((result) => {
+                return result;
+            })
+            .catch((err) => {
+                console.log(err);
+                return self.q.when({});
+            });
+    }
+
+    getUserByUsername(username) {
+        let query = {
+            username: username
+        };
+
+        return self._find(query, schema)
+            .then((result) => {
+                return result;
+            })
+            .catch((err) => {
+                console.log(err);
+                return self.q.when({});
+            });
+    }
+
+    checkPassword(username, password) {
+        let query = {
+            username: username,
+            password: password
+        };
+
+        return self._find(query, schema)
             .then((result) => {
                 return result;
             })

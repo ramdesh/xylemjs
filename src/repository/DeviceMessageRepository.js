@@ -54,7 +54,7 @@ export default class DeviceMessageRepository extends BaseRepository {
         let query = {
             deviceId: deviceId
         };
-        return self._find(query, schema)
+        return self._findAll(query, schema)
             .then((result) => {
                 return result;
             })

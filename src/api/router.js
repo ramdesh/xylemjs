@@ -5,6 +5,7 @@ let self, router = new express.Router();
 export default class Router {
 
     constructor(userController,
+                loginController,
                 deviceController,
                 constants,
                 swaggerSpec) {
@@ -22,6 +23,7 @@ export default class Router {
         router.use(`/swagger`, loadSwagger);
 
         router.use(`${path}/users`, userController);
+        router.use(`${path}/login`, loginController);
         router.use(`${path}/devices`, deviceController);
 
         return router;

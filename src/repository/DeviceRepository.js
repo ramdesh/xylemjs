@@ -52,7 +52,7 @@ export default class DeviceRepository extends BaseRepository {
         let query = {
             ownerId: userId
         };
-        return self._find(query, schema)
+        return self._findAll(query, schema)
             .then((result) => {
                 return result;
             })

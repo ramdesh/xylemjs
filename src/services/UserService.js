@@ -28,7 +28,7 @@ export default class UserService {
             })
             .catch((err) => {
                 console.log(err);
-                return self.q.when(null);
+                return self.q.when(err);;
             });
     }
 
@@ -39,7 +39,18 @@ export default class UserService {
             })
             .catch((err) => {
                 console.log(err);
-                return self.q.when(null);
+                return self.q.when(err);
+            });
+    }
+
+    getUsers() {
+        return self.userRepository.getUsers()
+            .then((result) => {
+                return self.q.when(result);
+            })
+            .catch((err) => {
+                console.log(err);
+                return self.q.when(err);
             });
     }
 
@@ -50,7 +61,7 @@ export default class UserService {
             })
             .catch((err) => {
                 console.log(err);
-                return self.q.when(null);
+                return self.q.when(err);
             });
     }
 
@@ -61,7 +72,7 @@ export default class UserService {
             })
             .catch((err) => {
                 console.log(err);
-                return self.q.when(null);
+                return self.q.when(err);
             });
     }
 
@@ -72,7 +83,7 @@ export default class UserService {
             })
             .catch((err) => {
                 console.log(err);
-                return self.q.when(null);
+                return self.q.when(err);
             });
     }
 
@@ -83,7 +94,29 @@ export default class UserService {
             })
             .catch(err => {
                 console.log(err);
-                return self.q.when(null);
+                return self.q.when(err);
+            });
+    }
+
+    loginUser(username, password) {
+        return self.userRepository.getUserByUsername(username)
+            .then(result => {
+                if(!result || !result.username) {
+                    throw self.exceptionFactory.createInstance('E0100', 404);
+                }
+                return self.userRepository.checkPassword(username, password)
+                    .then(user => {
+                       if(user && user.username) {
+                           delete user.password;
+                           return self.q.when(user);
+                       } else {
+                           throw self.exceptionFactory.createInstance('E0101', 403);
+                       }
+                    });
+            })
+            .catch(err => {
+                console.log(err);
+                return self.q.when(err);
             });
     }
 }
