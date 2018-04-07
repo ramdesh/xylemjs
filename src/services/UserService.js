@@ -19,6 +19,7 @@ export default class UserService {
         self.constants = constants;
         self.exceptionFactory = exceptionFactory;
         self.userRepository = userRepository;
+        self.deviceRepository = deviceRepository;
     }
 
     insertUser(user) {
@@ -28,7 +29,7 @@ export default class UserService {
             })
             .catch((err) => {
                 console.log(err);
-                return self.q.when(err);;
+                return self.q.when(err);
             });
     }
 

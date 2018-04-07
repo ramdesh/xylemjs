@@ -19,6 +19,7 @@ import CrossOriginMW from './middleware/CrossOriginMW';
 // Import controllers
 import UserController from './api/user/UserController';
 import DeviceController from './api/device/DeviceController';
+import DeviceMessageController from './api/device/DeviceMessageController';
 import LoginController from './api/user/LoginController';
 
 // Import Factories
@@ -80,6 +81,7 @@ container.register({
     // Register controllers
     userController: awilix.asClass(UserController).singleton(),
     deviceController: awilix.asClass(DeviceController).singleton(),
+    deviceMessageController: awilix.asClass(DeviceMessageController).singleton(),
     loginController: awilix.asClass(LoginController).singleton(),
 
     // Register services

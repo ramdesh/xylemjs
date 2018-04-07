@@ -49,7 +49,16 @@ export default class DeviceMessageService {
     findMessagesByDevice(deviceId) {
         return self.deviceMessageRepository.findMessagesByDevice(deviceId)
             .then((result) => {
-                return self.q.when(result);
+                let messages = [];
+                if(Array.isArray(result)) {
+                    for(let i = 0; i < result.length; i++) {
+                        let message = result[i];
+                        if(message.topic.split("/")[0] !== "$SYS") {
+                            messages.push(message);
+                        }
+                    }
+                }
+                return self.q.when(messages);
             })
             .catch((err) => {
                 console.log(err);

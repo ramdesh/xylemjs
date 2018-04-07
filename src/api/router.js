@@ -7,6 +7,7 @@ export default class Router {
     constructor(userController,
                 loginController,
                 deviceController,
+                deviceMessageController,
                 constants,
                 swaggerSpec) {
         self = this;
@@ -25,6 +26,7 @@ export default class Router {
         router.use(`${path}/users`, userController);
         router.use(`${path}/login`, loginController);
         router.use(`${path}/devices`, deviceController);
+        router.use(`${path}/devices/:id/messages`, deviceMessageController);
 
         return router;
     }
