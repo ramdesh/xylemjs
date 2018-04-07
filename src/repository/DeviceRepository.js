@@ -14,6 +14,7 @@ export default class DeviceRepository extends BaseRepository {
 
         let Schema = self.mongoose.Schema;
         let schemaStructure = {
+            clientId: String,
             type: String,
             ownerId: String
         };
@@ -21,8 +22,6 @@ export default class DeviceRepository extends BaseRepository {
     }
 
     insertDevice(device) {
-        device._id = device.id;
-        delete device.id;
         return self._insert(device, schema)
             .then((result) => {
                 return result;
@@ -35,7 +34,7 @@ export default class DeviceRepository extends BaseRepository {
 
     findDevice(id) {
         let query = {
-            _id: id
+            clientId: id
         };
 
         return self._find(query, schema)
@@ -64,7 +63,7 @@ export default class DeviceRepository extends BaseRepository {
 
     updateDevice(id, updateDevice) {
         let query = {
-            _id: id
+            clientId: id
         };
         return self._update(query, updateDevice, schema)
             .then((result) => {
@@ -78,7 +77,7 @@ export default class DeviceRepository extends BaseRepository {
 
     removeDevice(id) {
         let deleteDevice = {
-            _id: id
+            clientId: id
         };
 
         return self._remove(deleteDevice, schema)

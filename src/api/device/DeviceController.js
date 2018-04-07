@@ -24,9 +24,10 @@ export default class DeviceController {
 
     createDevice(req, res, next) {
         let device = {
-            id: req.body.id,
+            clientId: req.body.id,
             type: req.body.type,
-            ownerId: req.body.ownerId
+            ownerId: req.body.ownerId,
+            token: req.body.token
         };
         self.deviceService.insertDevice(device)
             .then((result) => {

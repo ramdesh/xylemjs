@@ -2,7 +2,7 @@ var mqtt = require('mqtt');
 var client  = mqtt.connect('mqtt://localhost:1883');
 
 client.on('connect', function () {
-    client.subscribe('xylem/test-client/sensor-values');
+    //client.subscribe('xylem/test-client/sensor-values');
     client.publish('xylem/test-client/sensor-values',
         '{' +
         '"gyro_x":"3.019201019"' +
