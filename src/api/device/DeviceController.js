@@ -24,7 +24,7 @@ export default class DeviceController {
 
     createDevice(req, res, next) {
         let device = {
-            clientId: req.body.id,
+            clientId: req.body.clientId,
             type: req.body.type,
             ownerId: req.body.ownerId,
             token: req.body.token
