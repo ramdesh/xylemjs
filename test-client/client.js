@@ -3,9 +3,9 @@ var client  = mqtt.connect('mqtt://localhost:1883');
 
 client.on('connect', function () {
     var count = 3;
-    client.subscribe('xylem/test-client/commands');
+    client.subscribe('xylem/test-client-4/commands');
     for(var i = 0; i < count; i++) {
-        client.publish('xylem/test-client/sensor-values',
+        client.publish('xylem/test-client-4/sensor-values',
             '{' +
             '"gyro_x": ' + Math.random() * 10 +
             '"gyro_y":' + Math.random() * 10 +
