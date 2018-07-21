@@ -48,7 +48,7 @@ let Mqttsv = function(){
     server.on('published', function(packet, client) {
         console.log('Published', packet);
         let deviceId = packet.topic.split('/')[1];
-        deviceMessageService.insertDeviceMessage('test-client', packet.topic, packet.payload.toString());
+        deviceMessageService.insertDeviceMessage(deviceId, packet.topic, packet.payload.toString());
     });
 
     // when client return puback,
